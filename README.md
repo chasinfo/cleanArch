@@ -1,8 +1,8 @@
 ## Em um projeto pronto, adicionar a listagem de ordens
 - listagem das ordens
-- criar endpoint rest
-- criar endpoint grpc
-- criar uma query com GraphQL
+  - criar endpoint rest
+  - criar endpoint grpc
+  - criar uma query com GraphQL
  
 #### Sobre o sistema 
 - Go Versão: 1.21
@@ -16,19 +16,28 @@
 
 baixar o projeto
 ```
-git clone https://github.com/chasinfo/go-client-server.git
+git clone https://github.com/chasinfo/cleanArch.git
 ```
 
-Iniciar o container: 
+subir os containers: 
 ```
 cd cleanArch
 docker-compose up -d
+```
+
+iniciar a aplicação
+```
 cd cmd/ordersystem
 go main.go wire_gen.go 
 ```
 
-Fazer requisições utilizando algum client Rest, Ex. Postman.
-```
-Post:
-Get:
-```
+Fazer requisições utilizando um client Rest, Ex. Postman.
+- Post: localhost:8000/order
+  - body json:
+{
+    "id":"ssaaa",
+    "price": 100.5,
+    "tax": 0.5
+}
+
+- Get: localhost:8000/order
