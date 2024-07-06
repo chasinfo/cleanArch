@@ -29,9 +29,14 @@ func (s *WebServer) AddHandler(path string, handler http.HandlerFunc) {
 // register middeleware logger
 // start the server
 func (s *WebServer) Start() {
-	s.Router.Use(middleware.Logger)
+	s.Router.Use(
+		middleware.Logger,
+		middleware.AllowContentType("application/json"),
+	)
+
 	for path, handler := range s.Handlers {
 		s.Router.Handle(path, handler)
 	}
+
 	http.ListenAndServe(s.WebServerPort, s.Router)
 }

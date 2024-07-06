@@ -1,3 +1,4 @@
+// É acessando quando existe uma requisição no endpoint
 package web
 
 import (
@@ -41,6 +42,24 @@ func (h *WebOrderHandler) Create(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
+	err = json.NewEncoder(w).Encode(output)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+}
+
+func (h *WebOrderHandler) GetOrders(w http.ResponseWriter, r *http.Request) {
+	createOrder := usecase.NewCreateOrderUseCase(h.OrderRepository, h.OrderCreatedEvent, h.EventDispatcher)
+	output, err := createOrder.GetOrders()
+
+	w.Header().Set("Content-Type", "application/json")
+
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
 	err = json.NewEncoder(w).Encode(output)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)

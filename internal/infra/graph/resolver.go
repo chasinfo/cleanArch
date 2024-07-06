@@ -1,6 +1,8 @@
 package graph
 
-import "github.com/chasinfo/cleanArch/internal/usecase"
+import (
+	"github.com/chasinfo/cleanArch/internal/usecase"
+)
 
 // This file will not be regenerated automatically.
 //

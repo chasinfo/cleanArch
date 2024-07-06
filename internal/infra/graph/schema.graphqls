@@ -12,7 +12,7 @@ input OrderInput {
 }
 
 type Query {
-    orders: [Order]
+    orders: [Order!]!
 }
 
 type Mutation {
