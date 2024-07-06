@@ -51,6 +51,9 @@ $ go main.go wire_gen.go
 ```
 
 #### Fazer requisições utilizando um client GraphQL
+
+http://localhost:8080
+
 ```yml
 mutation createOrder {
   createOrder(input: {id: "jujuba", Price: 13.5, Tax:3.0}) {
