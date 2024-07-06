@@ -58,7 +58,7 @@ mutation createOrder {
   	Price
   	Tax
   	FinalPrice
-	}
+  }
 }
 
 query queryOrders {
