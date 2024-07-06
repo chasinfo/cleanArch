@@ -77,7 +77,7 @@ query queryOrders {
 $ evans -r repl
 ```
 
-### listar ordens
+#### listar ordens
 ```evans
 127.0.0.1:50051> package pb
 
