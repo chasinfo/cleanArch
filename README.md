@@ -11,7 +11,9 @@
 - container docker utilizados:
   - Mysql 5.7
   - RabbitMq
-
+- migrate
+  - https://github.com/golang-migrate/migrate
+  - 
 ### Utilização 
 
 #### baixar o projeto
@@ -24,7 +26,10 @@ $ git clone https://github.com/chasinfo/cleanArch.git
 $ cd cleanArch
 $ docker-compose up -d
 ```
-
+#### executar o migrate para criar os objetos no banco
+```bash
+$ migrate -path=internal/infra/database/migrations --database "mysql://root:root@tcp(localhost:3306)/orders" -verbose up
+```
 #### iniciar a aplicação
 ```bash
 $ cd cmd/ordersystem
