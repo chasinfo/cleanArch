@@ -24,7 +24,7 @@ func (s *OrderService) CreateOrder(ctx context.Context, in *pb.CreateOrderReques
 		Price: float64(in.Price),
 		Tax:   float64(in.Tax),
 	}
-	output, err := s.CreateOrderUseCase.Execute(dto)
+	output, err := s.CreateOrderUseCase.SaveOrders(dto)
 	if err != nil {
 		return nil, err
 	}
@@ -37,8 +37,7 @@ func (s *OrderService) CreateOrder(ctx context.Context, in *pb.CreateOrderReques
 }
 
 func (s *OrderService) ListOrders(ctx context.Context, in *pb.Blank) (*pb.OrderList, error) {
-	orders, err := s.CreateOrderUseCase.OrderRepository.OrderList()
-
+	orders, err := s.CreateOrderUseCase.GetOrders()
 	if err != nil {
 		return nil, err
 	}

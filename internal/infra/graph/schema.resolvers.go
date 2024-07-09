@@ -18,7 +18,7 @@ func (r *mutationResolver) CreateOrder(ctx context.Context, input *model.OrderIn
 		Price: float64(input.Price),
 		Tax:   float64(input.Tax),
 	}
-	output, err := r.CreateOrderUseCase.Execute(dto)
+	output, err := r.CreateOrderUseCase.SaveOrders(dto)
 	if err != nil {
 		return nil, err
 	}
@@ -31,7 +31,7 @@ func (r *mutationResolver) CreateOrder(ctx context.Context, input *model.OrderIn
 }
 
 func (r *queryResolver) Orders(ctx context.Context) ([]*model.Order, error) {
-	orders, err := r.CreateOrderUseCase.OrderRepository.OrderList()
+	orders, err := r.CreateOrderUseCase.GetOrders()
 
 	if err != nil {
 		return nil, err

@@ -20,7 +20,6 @@
 ```bash
 $ git clone https://github.com/chasinfo/cleanArch.git
 ```
-
 #### subir os containers: 
 ```bash
 $ cd cleanArch
@@ -80,7 +79,6 @@ query queryOrders {
 ```
 
 #### Fazer requisições utilizando GRPC
-
 ```bash
 $ evans -r repl
 ```

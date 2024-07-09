@@ -5,19 +5,6 @@ import (
 	"github.com/chasinfo/cleanArch/pkg/events"
 )
 
-type OrderInputDTO struct {
-	ID    string  `json:"id"`
-	Price float64 `json:"price"`
-	Tax   float64 `json:"tax"`
-}
-
-type OrderOutputDTO struct {
-	ID         string  `json:"id"`
-	Price      float64 `json:"price"`
-	Tax        float64 `json:"tax"`
-	FinalPrice float64 `json:"final_price"`
-}
-
 type CreateOrderUseCase struct {
 	OrderRepository entity.OrderRepositoryInterface
 	OrderCreated    events.EventInterface
@@ -36,7 +23,7 @@ func NewCreateOrderUseCase(
 	}
 }
 
-func (c *CreateOrderUseCase) Execute(input OrderInputDTO) (OrderOutputDTO, error) {
+func (c *CreateOrderUseCase) SaveOrders(input OrderInputDTO) (OrderOutputDTO, error) {
 	order := entity.Order{
 		ID:    input.ID,
 		Price: input.Price,
@@ -58,4 +45,29 @@ func (c *CreateOrderUseCase) Execute(input OrderInputDTO) (OrderOutputDTO, error
 	c.EventDispatcher.Dispatch(c.OrderCreated)
 
 	return dto, nil
+}
+
+func (c *CreateOrderUseCase) GetOrders() ([]OrderOutputDTO, error) {
+
+	orders, err := c.OrderRepository.OrderList()
+
+	if err != nil {
+		return []OrderOutputDTO{}, err
+	}
+
+	var dtos []OrderOutputDTO
+
+	for _, order := range orders {
+
+		dto := OrderOutputDTO{
+			ID:         order.ID,
+			Price:      order.Price,
+			Tax:        order.Tax,
+			FinalPrice: order.FinalPrice,
+		}
+
+		dtos = append(dtos, dto)
+	}
+
+	return dtos, nil
 }
